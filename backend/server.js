@@ -88,6 +88,10 @@ app.use('/api/ai', aiRoutes);
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
 app.use('/api/leaderboard', leaderboardRoutes);
 
+// Resource Routes
+const resourceRoutes = require('./routes/resourceRoutes');
+app.use('/api/resources', resourceRoutes);
+
 // Avoid actually connecting to Mongoose if MONGO_URI is a dummy one for now,
 // but let's write the connection code to satisfy requirements.
 mongoose.connect(process.env.MONGO_URI, {

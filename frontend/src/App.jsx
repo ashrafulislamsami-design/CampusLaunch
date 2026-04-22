@@ -47,6 +47,12 @@ import NotificationInbox from './pages/Notifications/NotificationInbox';
 import AIValidator from './pages/AI/AIValidator';
 import AIReportPage from './pages/AI/AIReportPage';
 
+// Resources
+import Resources from './pages/Resources/Resources';
+import AddResource from './pages/Resources/AddResource';
+import ResourceDetail from './pages/Resources/ResourceDetail';
+import EditResource from './pages/Resources/EditResource';
+
 // Private Route Wrapper
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -248,6 +254,19 @@ function App() {
               <Route path="/leaderboard" element={
                 <PrivateRoute>
                   <Leaderboard />
+                </PrivateRoute>
+              } />
+
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/resources/add" element={
+                <PrivateRoute>
+                  <AddResource />
+                </PrivateRoute>
+              } />
+              <Route path="/resources/:id" element={<ResourceDetail />} />
+              <Route path="/resources/:id/edit" element={
+                <PrivateRoute>
+                  <EditResource />
                 </PrivateRoute>
               } />
             </Routes>

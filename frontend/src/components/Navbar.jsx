@@ -85,6 +85,12 @@ const Navbar = () => {
                   >
                     AI Validator
                   </Link>
+                  <Link
+                    to="/resources"
+                    className="text-stone-700 hover:text-teal-700 transition font-bold uppercase tracking-widest text-[10px] lg:text-xs whitespace-nowrap"
+                  >
+                    Resources
+                  </Link>
                   
                   {/* Notification Bell */}
                   <Link
