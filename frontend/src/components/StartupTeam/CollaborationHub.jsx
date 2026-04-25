@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Send, Link as LinkIcon, FilePlus, ExternalLink, Pin, Trash2 } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 
 const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = [], onRefresh, isCEO = false, onDeleteDocument }) => {
   const { token, user } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
   useEffect(() => {
     const loadMessages = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/messages/${teamId}`, {
+        const res = await fetch(`${API_BASE_URL}/messages/${teamId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -37,7 +38,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
 
     const loadTeamMembers = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/messages/${teamId}/members`, {
+        const res = await fetch(`${API_BASE_URL}/messages/${teamId}/members`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -51,7 +52,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
 
     const loadPinnedMessages = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/messages/${teamId}/pinned`, {
+        const res = await fetch(`${API_BASE_URL}/messages/${teamId}/pinned`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -106,7 +107,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
     e.preventDefault();
     if (!msgText.trim()) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/messages`, {
+      const res = await fetch(`${API_BASE_URL}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ teamId, text: msgText })
@@ -125,7 +126,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
 
   const handlePinMessage = async (messageId, currentPinStatus) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/messages/${messageId}/pin`, {
+      const res = await fetch(`${API_BASE_URL}/messages/${messageId}/pin`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -134,7 +135,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
         setMessages(messages.map(m => m._id === messageId ? updatedMessage : m));
         
         // Reload pinned messages
-        const pinnedRes = await fetch(`http://localhost:5000/api/messages/${teamId}/pinned`, {
+        const pinnedRes = await fetch(`${API_BASE_URL}/messages/${teamId}/pinned`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (pinnedRes.ok) {
@@ -175,7 +176,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
   const handleDeleteMessage = async (msgId) => {
     if (!window.confirm('Delete this message?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/messages/${msgId}`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/messages/${msgId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -201,7 +202,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
     }
     if (!window.confirm('Remove this document from the vault?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/documents/${docId}`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/documents/${docId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -216,7 +217,7 @@ const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = 
   const handleAddDocument = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/documents`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/documents`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(docData)

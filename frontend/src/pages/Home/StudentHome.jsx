@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config';
 import { Rocket, Target, CalendarDays, Coins, Users, Gem, BookOpen, Mic2, LayoutGrid, FileText} from 'lucide-react';
 import FundingCard from '../Funding/FundingCard';
 
@@ -16,7 +17,7 @@ const StudentHome = () => {
 
   const fetchWatchlist = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/watchlist`, {
+      const res = await fetch(`${API_BASE_URL}/users/watchlist`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -30,7 +31,7 @@ const StudentHome = () => {
 
   const toggleSave = async (fundingId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/funding/watchlist`, {
+      const res = await fetch(`${API_BASE_URL}/funding/watchlist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

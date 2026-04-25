@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Save } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 
 const Block = ({ title, name, rowSpan, colSpan, extraClasses = '', value, onChange, onBlur }) => (
   <div className={`flex flex-col bg-[#ebe9e4] border-2 border-stone-200 p-5 ${rowSpan} ${colSpan} ${extraClasses}`}>
@@ -33,7 +34,7 @@ const BusinessCanvas = ({ teamId }) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/teams/${teamId}/canvas`, {
+    fetch(`${API_BASE_URL}/teams/${teamId}/canvas`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -51,7 +52,7 @@ const BusinessCanvas = ({ teamId }) => {
     setSaving(true);
     setMessage('');
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/canvas`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/canvas`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(canvas)

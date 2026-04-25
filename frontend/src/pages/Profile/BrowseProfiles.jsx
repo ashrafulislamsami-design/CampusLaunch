@@ -5,7 +5,7 @@ import {
   CheckCircle2, ExternalLink, UserCheck, Award
 } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 const SKILL_OPTIONS = [
   'coding', 'design', 'marketing', 'writing', 'finance',

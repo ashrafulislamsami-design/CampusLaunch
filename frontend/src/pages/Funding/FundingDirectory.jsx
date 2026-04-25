@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import FundingCard from './FundingCard';
 import { Search, Filter, Rocket } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 
 const FundingDirectory = () => {
   const { token, user, setUser } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const FundingDirectory = () => {
   const fetchFunding = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/funding?search=${search}&category=${category}`, {
+      const res = await fetch(`${API_BASE_URL}/funding?search=${search}&category=${category}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -35,7 +36,7 @@ const FundingDirectory = () => {
 
   const toggleSave = async (fundingId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/funding/watchlist`, {
+      const res = await fetch(`${API_BASE_URL}/funding/watchlist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

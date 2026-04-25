@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
 import { Plus, Users, LayoutTemplate, KanbanSquare, Pencil, X, ExternalLink, Activity, MessageSquare, Trash2, FileText, Link as LinkIcon } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 import BusinessCanvas from '../../components/StartupTeam/BusinessCanvas';
 import CollaborationHub from '../../components/StartupTeam/CollaborationHub';
 import ProgressTimeline from '../../components/StartupTeam/ProgressTimeline';
@@ -89,7 +90,7 @@ const TeamDashboard = () => {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/documents/${docId}`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/documents/${docId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -106,7 +107,7 @@ const TeamDashboard = () => {
   const handleRoleChange = async (memberUserId, newRole) => {
     setUpdatingRole(memberUserId);
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/members/${memberUserId}/role`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/members/${memberUserId}/role`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ role: newRole })
@@ -130,7 +131,7 @@ const TeamDashboard = () => {
     e.preventDefault();
     setInviteError('');
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/members`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/members`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(inviteData)
@@ -148,7 +149,7 @@ const TeamDashboard = () => {
   const handleEditProject = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/details`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/details`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(editProjectData)
@@ -167,7 +168,7 @@ const TeamDashboard = () => {
   const handleRemoveMember = async (memberUserId) => {
     if (!window.confirm('Are you sure you want to remove this member from the team?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/members/${memberUserId}`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/members/${memberUserId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -189,7 +190,7 @@ const TeamDashboard = () => {
     if (e) e.preventDefault();
     setAcceptingInvite(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}/invites/accept`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}/invites/accept`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -213,7 +214,7 @@ const TeamDashboard = () => {
   // Fetch Team Data
   const fetchTeam = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/teams/${teamId}`, {
+      const res = await fetch(`${API_BASE_URL}/teams/${teamId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -229,7 +230,7 @@ const TeamDashboard = () => {
   const fetchReports = async () => {
     setLoadingReports(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/ai/reports/team/${teamId}`, {
+      const res = await fetch(`${API_BASE_URL}/ai/reports/team/${teamId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -251,7 +252,7 @@ const TeamDashboard = () => {
 
   const updateTaskStatus = async (taskId, status) => {
     try {
-      await fetch(`http://localhost:5000/api/teams/${teamId}/tasks/${taskId}`, {
+      await fetch(`${API_BASE_URL}/teams/${teamId}/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status })
@@ -266,7 +267,7 @@ const TeamDashboard = () => {
     e.preventDefault();
     if (!newTaskTitle.trim()) return;
     try {
-      await fetch(`http://localhost:5000/api/teams/${teamId}/tasks`, {
+      await fetch(`${API_BASE_URL}/teams/${teamId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ title: newTaskTitle, status: 'To Do' })
@@ -281,7 +282,7 @@ const TeamDashboard = () => {
   const handleDeleteTask = async (taskId) => {
     if (!window.confirm('Delete this task?')) return;
     try {
-      await fetch(`http://localhost:5000/api/teams/${teamId}/tasks/${taskId}`, {
+      await fetch(`${API_BASE_URL}/teams/${teamId}/tasks/${taskId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

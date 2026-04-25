@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Zap, Plus, CheckCircle, Clock, Code2, BookOpen, Sparkles } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config';
 
 const MatchingEngine = () => {
   const { token, user } = useContext(AuthContext);
@@ -17,14 +18,14 @@ const MatchingEngine = () => {
     const fetchMatches = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:5000/api/match', {
-          headers: { 'Authorization': `Bearer ${token}` }
+        const res = await axios.get(`${API_BASE_URL}/match`, {
+          headers: { `Authorization`: `Bearer ${token}` }
         });
         if (res.status === 200) {
           setMatches(res.data.matches || res.data || []);
         }
       } catch (err) {
-        console.error('Failed to fetch matches:', err);
+        console.error(`Failed to fetch matches:`, err);
       } finally {
         setLoading(false);
       }
@@ -32,15 +33,15 @@ const MatchingEngine = () => {
 
     const fetchConnections = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/connections', {
-          headers: { 'Authorization': `Bearer ${token}` }
+        const res = await fetch(`${API_BASE_URL}/connections`, {
+          headers: { `Authorization`: `Bearer ${token}` }
         });
         const data = await res.json();
         if (res.ok) {
           setConnections(Array.isArray(data) ? data : []);
         }
       } catch (err) {
-        console.error('Failed to fetch connections:', err);
+        console.error(`Failed to fetch connections:`, err);
       }
     };
 
@@ -54,30 +55,30 @@ const MatchingEngine = () => {
   const handleConnect = async (userId) => {
     try {
       setConnecting(userId);
-      const res = await axios.post('http://localhost:5000/api/connections/send',
+      const res = await axios.post(`${API_BASE_URL}/connections/send`,
         {
           receiverId: userId,
           message: messageText
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`
+            `Authorization`: `Bearer ${token}`
           }
         }
       );
 
       if (res.status === 200 || res.status === 201) {
         // Refresh connections
-        const connectRes = await axios.get('http://localhost:5000/api/connections', {
-          headers: { 'Authorization': `Bearer ${token}` }
+        const connectRes = await axios.get(`${API_BASE_URL}/connections`, {
+          headers: { `Authorization`: `Bearer ${token}` }
         });
         if (connectRes.status === 200) {
           setConnections(Array.isArray(connectRes.data) ? connectRes.data : []);
         }
-        setMessageText('');
+        setMessageText(``);
       }
     } catch (err) {
-      console.error('Failed to send connection:', err);
+      console.error(`Failed to send connection:`, err);
     } finally {
       setConnecting(null);
     }
@@ -86,19 +87,19 @@ const MatchingEngine = () => {
   // Handle accept connection
   const handleAccept = async (connectionId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/connections/respond`, {
-        method: 'PATCH',
+      const res = await fetch(`${API_BASE_URL}/connections/respond`, {
+        method: `PATCH`,
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          `Content-Type`: `application/json`,
+          `Authorization`: `Bearer ${token}`
         },
-        body: JSON.stringify({ connectionId, status: 'accepted' })
+        body: JSON.stringify({ connectionId, status: `accepted` })
       });
 
       if (res.ok) {
         // Refresh connections
-        const connectRes = await fetch('http://localhost:5000/api/connections', {
-          headers: { 'Authorization': `Bearer ${token}` }
+        const connectRes = await fetch(`${API_BASE_URL}/connections`, {
+          headers: { `Authorization`: `Bearer ${token}` }
         });
         const data = await connectRes.json();
         if (connectRes.ok) {
@@ -106,7 +107,7 @@ const MatchingEngine = () => {
         }
       }
     } catch (err) {
-      console.error('Failed to accept connection:', err);
+      console.error(`Failed to accept connection:`, err);
     }
   };
 

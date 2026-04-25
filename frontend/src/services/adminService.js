@@ -4,7 +4,9 @@
  * Every call attaches the Bearer token from localStorage.
  */
 
-const BASE = 'http://localhost:5000/api/admin';
+import { API_BASE_URL } from '../config';
+
+const BASE = `${API_BASE_URL}/admin`;
 
 function authHeaders(token) {
   return {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Star, Filter, Briefcase, Zap } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 const EXPERTISE_OPTIONS = ['tech', 'marketing', 'finance', 'law', 'product', 'design', 'operations', 'fundraising'];
 
 function StarDisplay({ rating }) {

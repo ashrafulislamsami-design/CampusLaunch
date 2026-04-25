@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Trophy, Users, Award, Star, TrendingUp, DollarSign, BookOpen, UserCheck } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 const Leaderboard = () => {
   const { token, user } = useContext(AuthContext);
@@ -17,8 +18,8 @@ const Leaderboard = () => {
     try {
       setLoading(true);
       const [uniRes, studentRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/leaderboard/university'),
-        axios.get('http://localhost:5000/api/leaderboard/individual')
+        axios.get(`${API_BASE_URL}/leaderboard/university`),
+        axios.get(`${API_BASE_URL}/leaderboard/individual`)
       ]);
       setUniversityRankings(uniRes.data);
       setStudentRankings(studentRes.data);
@@ -36,7 +37,7 @@ const Leaderboard = () => {
 
   const handleNominate = async (studentId) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/api/leaderboard/ambassador/${studentId}`, {}, {
+      const res = await axios.patch(`${API_BASE_URL}/leaderboard/ambassador/${studentId}`, {}, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       toast.success(res.data.message);

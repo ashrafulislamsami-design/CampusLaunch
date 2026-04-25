@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import { CalendarDays, Clock, FileText, Star, Video, BookOpen } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 const STATUS_STYLES = {
   pending:   'bg-amber-50 text-amber-800 border-amber-200',

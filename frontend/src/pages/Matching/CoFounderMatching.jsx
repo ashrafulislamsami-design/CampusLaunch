@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Users, MessageSquare, GraduationCap, MapPin, Sparkles, CheckCircle, UserCheck, Send, X } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
 
 const CoFounderMatching = () => {
   const { token, user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const CoFounderMatching = () => {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/match', {
+        const res = await axios.get(`${API_BASE_URL}/match`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.status === 200) {
@@ -38,7 +39,7 @@ const CoFounderMatching = () => {
 
     const fetchConnections = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/connections', {
+        const res = await axios.get(`${API_BASE_URL}/connections`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.status === 200) {
@@ -65,7 +66,7 @@ const CoFounderMatching = () => {
       setConnecting(userId);
       const customMessage = requestMessages[userId] || 'Hi! I found your profile on the CampusLaunch Matching Hub and think we would be a great co-founder match. I would love to connect and discuss our startup ideas.';
       
-      const res = await axios.post('http://localhost:5000/api/connections/send', 
+      const res = await axios.post(`${API_BASE_URL}/connections/send`, 
         { receiverId: userId, message: customMessage },
         { headers: { 'Authorization': `Bearer ${token}` } }
       );

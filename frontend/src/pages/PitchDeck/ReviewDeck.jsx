@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL as API, SOCKET_URL as ORIGIN } from '../../config';
 import { Star, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
-
-const API = 'http://localhost:5000';
 
 const CRITERIA = [
   { key: 'problemClarity',    label: 'Problem Clarity' },
@@ -72,7 +71,7 @@ export default function ReviewDeck() {
 
       {/* View PDF link */}
       {deck?.versions?.length > 0 && (
-        <a href={`${API}${deck.versions[deck.versions.length - 1].filePath}`}
+        <a href={`${ORIGIN}${deck.versions[deck.versions.length - 1].filePath}`}
            target="_blank" rel="noreferrer"
            className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-teal-700 border-2 border-teal-200 px-4 py-2 hover:border-teal-500 transition"
            style={{ borderRadius: '8px 20px 8px 20px' }}>

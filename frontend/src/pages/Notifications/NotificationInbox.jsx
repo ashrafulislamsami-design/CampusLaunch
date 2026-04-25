@@ -7,7 +7,7 @@ import {
   CheckCheck, Check, Inbox, Settings, X, ToggleLeft, ToggleRight
 } from 'lucide-react';
 
-const API = 'http://localhost:5000/api';
+import { API_BASE_URL as API } from '../../config';
 
 // Map notification types to icons and color classes
 const TYPE_CONFIG = {

@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Rocket, Calendar, MapPin, Users } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const API = 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 function Field({ label, children }) {
   return (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Calendar, CheckCircle2, Clock, Users } from 'lucide-react';
 
-const API = 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 export default function MyEvents() {
   const { token } = useContext(AuthContext);

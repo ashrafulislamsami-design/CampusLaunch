@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { User as UserIcon, Bookmark, BookOpen, Building, Sparkles, TrendingUp } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 
 const ProfileSettings = () => {
   const { token, user, setUser } = useContext(AuthContext);
@@ -49,7 +50,7 @@ const ProfileSettings = () => {
         skills: formData.skills.split(',').map(s => s.trim()).filter(Boolean)
       };
 
-      const res = await fetch('http://localhost:5000/api/users/profile', {
+      const res = await fetch(`${API_BASE_URL}/users/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

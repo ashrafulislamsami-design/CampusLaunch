@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL as API } from '../../config';
 import { Upload, FileText, Rocket } from 'lucide-react';
 import toast from 'react-hot-toast';
-
-const API = 'http://localhost:5000';
 
 export default function UploadDeck() {
   const { id } = useParams();           // if present → new version upload

@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Clock, CheckCircle, UserCheck, Code2 } from 'lucide-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
 
 const ConnectionRequests = () => {
   const { token, user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const ConnectionRequests = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/connections/pending', {
+        const res = await axios.get(`${API_BASE_URL}/connections/pending`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.status === 200) {
@@ -29,7 +30,7 @@ const ConnectionRequests = () => {
 
   const handleRespond = async (connectionId, status) => {
     try {
-      const res = await axios.patch('http://localhost:5000/api/connections/respond', 
+      const res = await axios.patch(`${API_BASE_URL}/connections/respond`, 
         { connectionId, status },
         { headers: { 'Authorization': `Bearer ${token}` } }
       );

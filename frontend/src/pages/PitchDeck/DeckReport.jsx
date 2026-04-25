@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { BarChart2, TrendingUp, Users, Star, Upload, MessageSquare } from 'lucide-react';
 
-const API = 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 const CRITERIA_LABELS = {
   problemClarity:    'Problem Clarity',

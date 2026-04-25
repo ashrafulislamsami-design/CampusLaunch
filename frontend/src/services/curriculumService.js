@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
-const API = axios.create({ baseURL: '/api/curriculum' });
+const API = axios.create({ 
+  baseURL: `${API_BASE_URL}/curriculum` 
+});
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');

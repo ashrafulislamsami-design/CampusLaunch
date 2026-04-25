@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL as API } from '../../config';
 import {
   Search, Filter, MapPin, Video, Calendar, Users,
   Clock, Tag, Rocket, Plus, ExternalLink
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-
-const API = 'http://localhost:5000';
 
 const TYPE_OPTIONS  = ['All', 'pitch-competition', 'hackathon', 'workshop', 'networking', 'webinar', 'other'];
 const FORMAT_OPTIONS = ['All', 'online', 'in-person', 'hybrid'];

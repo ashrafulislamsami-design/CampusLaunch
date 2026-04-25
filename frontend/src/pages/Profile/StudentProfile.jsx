@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL as API } from '../../config';
 import ProfileForm from '../../components/profile/ProfileForm';
 import toast from 'react-hot-toast';
 import {
   Rocket, Edit3, Trash2, CheckCircle2, Clock, Link2,
   Users, Lightbulb, Code2, BookOpen, Award, Eye, EyeOff
 } from 'lucide-react';
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // ─── Tag colour map ───────────────────────────────────────────────────────────
 const TAG_STYLES = {

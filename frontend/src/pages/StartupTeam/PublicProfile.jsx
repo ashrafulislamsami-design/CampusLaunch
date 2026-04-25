@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Rocket, Target, Lightbulb, Users, BarChart3 } from 'lucide-react';
 import ProgressTimeline from '../../components/StartupTeam/ProgressTimeline';
+import { API_BASE_URL } from '../../config';
 
 const PublicProfile = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const PublicProfile = () => {
   useEffect(() => {
     const fetchPublicTeam = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/teams/public/${id}`);
+        const res = await fetch(`${API_BASE_URL}/teams/public/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || 'Failed to fetch team');
         setTeam(data);

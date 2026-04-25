@@ -8,7 +8,7 @@ import {
   Target, Lightbulb, TrendingUp
 } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { API_BASE_URL as API } from '../../config';
 
 export default function PortfolioEditor() {
   const { teamId } = useParams();

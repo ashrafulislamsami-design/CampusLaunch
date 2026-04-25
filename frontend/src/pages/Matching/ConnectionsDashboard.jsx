@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { CheckCircle, Clock, MessageSquare, UserCheck, X, Sparkles } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config';
 
 const ConnectionsDashboard = () => {
   const { token } = useContext(AuthContext);
@@ -17,10 +18,10 @@ const ConnectionsDashboard = () => {
     try {
       setLoading(true);
       const [pendingRes, activeRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/connections/pending', {
+        axios.get(`${API_BASE_URL}/connections/pending`, {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/connections/active', {
+        axios.get(`${API_BASE_URL}/connections/active`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);
@@ -39,7 +40,7 @@ const ConnectionsDashboard = () => {
 
   const handleRespond = async (connectionId, status) => {
     try {
-      await axios.patch('http://localhost:5000/api/connections/respond',
+      await axios.patch(`${API_BASE_URL}/connections/respond`,
         { connectionId, status },
         { headers: { 'Authorization': `Bearer ${token}` } }
       );

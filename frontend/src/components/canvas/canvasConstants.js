@@ -1,7 +1,9 @@
 // Shared constants for the Business Model Canvas Builder feature.
 
-export const API_BASE = 'http://localhost:5000';
-export const SOCKET_URL = 'http://localhost:5000';
+import { SOCKET_URL as BASE_ORIGIN } from '../../config';
+
+export const API_BASE = BASE_ORIGIN;
+export const SOCKET_URL = BASE_ORIGIN;
 
 export const SECTION_KEYS = [
   'keyPartnerships',

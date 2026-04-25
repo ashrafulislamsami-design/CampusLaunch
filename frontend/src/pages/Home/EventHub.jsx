@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { CalendarDays, MapPin, Link as LinkIcon, Users, CheckCircle } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 
 const EventHub = () => {
   const { token, userTeamId } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const EventHub = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/events', {
+      const res = await fetch(`${API_BASE_URL}/events`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -40,7 +41,7 @@ const EventHub = () => {
 
     setRegistering(eventId);
     try {
-      const res = await fetch(`http://localhost:5000/api/events/${eventId}/register`, {
+      const res = await fetch(`${API_BASE_URL}/events/${eventId}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ teamId: userTeamId })

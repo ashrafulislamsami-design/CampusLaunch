@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config';
 import { Rocket } from 'lucide-react';
 
 const CreateTeam = () => {
@@ -16,7 +17,7 @@ const CreateTeam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/teams', {
+      const res = await fetch(`${API_BASE_URL}/teams`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
