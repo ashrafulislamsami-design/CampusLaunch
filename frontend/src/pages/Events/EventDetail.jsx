@@ -21,7 +21,7 @@ export default function EventDetail() {
 
   const fetchEvent = async () => {
     try {
-      const res = await fetch(`${API}/api/hub/${id}`, {
+      const res = await fetch(`${API}/hub/${id}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
       if (res.ok) setEvent(await res.json());
@@ -31,7 +31,7 @@ export default function EventDetail() {
   const fetchMyReg = async () => {
     if (!token) return;
     try {
-      const res  = await fetch(`${API}/api/hub/my-registrations`, {
+      const res  = await fetch(`${API}/hub/my-registrations`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -43,7 +43,7 @@ export default function EventDetail() {
   const handleRsvp = async () => {
     setRsvpLoading(true);
     try {
-      const res  = await fetch(`${API}/api/hub/${id}/rsvp`, {
+      const res  = await fetch(`${API}/hub/${id}/rsvp`, {
         method: 'POST', headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -54,7 +54,7 @@ export default function EventDetail() {
 
   const handleCancelRsvp = async () => {
     if (!confirm('Cancel your registration?')) return;
-    const res = await fetch(`${API}/api/hub/${id}/rsvp`, {
+    const res = await fetch(`${API}/hub/${id}/rsvp`, {
       method: 'DELETE', headers: { Authorization: `Bearer ${token}` }
     });
     if (res.ok) { toast.success('Registration cancelled'); setMyReg(null); fetchEvent(); }
@@ -62,14 +62,14 @@ export default function EventDetail() {
 
   const handleDelete = async () => {
     if (!confirm('Delete this event?')) return;
-    const res = await fetch(`${API}/api/hub/${id}`, {
+    const res = await fetch(`${API}/hub/${id}`, {
       method: 'DELETE', headers: { Authorization: `Bearer ${token}` }
     });
     if (res.ok) { toast.success('Event deleted'); navigate('/events'); }
   };
 
   const handleFeedback = async () => {
-    const res = await fetch(`${API}/api/hub/${id}/feedback`, {
+    const res = await fetch(`${API}/hub/${id}/feedback`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ rating, comment })

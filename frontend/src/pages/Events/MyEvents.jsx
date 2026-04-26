@@ -13,8 +13,8 @@ export default function MyEvents() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/api/hub/my-registrations`, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
-      fetch(`${API}/api/hub/my-events`,        { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json())
+      fetch(`${API}/hub/my-registrations`, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
+      fetch(`${API}/hub/my-events`,        { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json())
     ]).then(([regs, created]) => {
       setRegistrations(Array.isArray(regs) ? regs : []);
       setMyCreated(Array.isArray(created) ? created : []);

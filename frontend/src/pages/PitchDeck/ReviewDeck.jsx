@@ -35,7 +35,7 @@ export default function ReviewDeck() {
   const [recommendation, setRecommendation]   = useState('needs-work');
 
   useEffect(() => {
-    fetch(`${API}/api/decks/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${API}/decks/${id}`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json()).then(d => { setDeck(d); setLoading(false); });
   }, [id]);
 
@@ -45,7 +45,7 @@ export default function ReviewDeck() {
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const res  = await fetch(`${API}/api/decks/${id}/reviews`, {
+      const res  = await fetch(`${API}/decks/${id}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ version: deck.currentVersion, criteria, overallComment, recommendation })

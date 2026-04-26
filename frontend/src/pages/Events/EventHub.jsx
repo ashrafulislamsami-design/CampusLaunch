@@ -35,7 +35,7 @@ function EventCard({ event, token, onRsvp }) {
     if (!token) { toast.error('Please log in to register'); return; }
     setRegistering(true);
     try {
-      const res  = await fetch(`${API}/api/hub/${event._id}/rsvp`, {
+      const res  = await fetch(`${API}/hub/${event._id}/rsvp`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -160,7 +160,7 @@ export default function EventHub() {
     if (format !== 'All') params.set('format', format);
     if (status !== 'All') params.set('status', status);
     try {
-      const res  = await fetch(`${API}/api/hub?${params}`, {
+      const res  = await fetch(`${API}/hub?${params}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
       const data = await res.json();

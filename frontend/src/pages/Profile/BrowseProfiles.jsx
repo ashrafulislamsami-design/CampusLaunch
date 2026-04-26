@@ -174,7 +174,7 @@ export default function BrowseProfiles() {
     if (minAvail)     params.set('minAvailability', minAvail);
     if (search)       params.set('search', search);
     try {
-      const res  = await fetch(`${API}/api/profiles?${params}`);
+      const res  = await fetch(`${API}/profiles?${params}`);
       const data = await res.json();
       setProfiles(data.profiles || []);
       setTotal(data.total || 0);

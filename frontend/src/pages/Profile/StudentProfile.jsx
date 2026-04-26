@@ -55,7 +55,7 @@ export default function StudentProfile() {
   const fetchMyProfile = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API}/api/profiles/me`, {
+      const res = await fetch(`${API}/profiles/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.status === 404) { setProfile(null); }
@@ -65,7 +65,7 @@ export default function StudentProfile() {
   };
 
   const handleCreate = async (formData) => {
-    const res = await fetch(`${API}/api/profiles`, {
+    const res = await fetch(`${API}/profiles`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(formData),
@@ -76,7 +76,7 @@ export default function StudentProfile() {
   };
 
   const handleUpdate = async (formData) => {
-    const res = await fetch(`${API}/api/profiles`, {
+    const res = await fetch(`${API}/profiles`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(formData),
@@ -88,7 +88,7 @@ export default function StudentProfile() {
 
   const handleDelete = async () => {
     if (!confirm('Delete your profile? This cannot be undone.')) return;
-    const res = await fetch(`${API}/api/profiles`, {
+    const res = await fetch(`${API}/profiles`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     });

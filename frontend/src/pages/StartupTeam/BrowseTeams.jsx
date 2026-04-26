@@ -76,7 +76,7 @@ export default function BrowseTeams() {
     const fetchTeams = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${API}/api/teams/public${search ? `?search=${search}` : ''}`);
+        const res = await fetch(`${API}/teams/public${search ? `?search=${search}` : ''}`);
         const data = await res.json();
         setTeams(data);
       } catch (err) {

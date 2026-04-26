@@ -9,7 +9,7 @@ export default function EventArchive() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API}/api/hub/archive`)
+    fetch(`${API}/hub/archive`)
       .then(r => r.json())
       .then(d => { setEvents(Array.isArray(d) ? d : []); setLoading(false); });
   }, []);

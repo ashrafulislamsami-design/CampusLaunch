@@ -31,7 +31,7 @@ export default function MentorList() {
     if (minRating) params.set('minRating', minRating);
     if (sessionType) params.set('sessionType', sessionType);
     try {
-      const res = await fetch(`${API}/api/mentors?${params}`);
+      const res = await fetch(`${API}/mentors?${params}`);
       const data = await res.json();
       setMentors(data.mentors || []);
     } finally {

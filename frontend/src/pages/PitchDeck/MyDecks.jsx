@@ -13,14 +13,14 @@ export default function MyDecks() {
   useEffect(() => { fetchDecks(); }, []);
 
   const fetchDecks = () => {
-    fetch(`${API}/api/decks/my`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${API}/decks/my`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => { setDecks(Array.isArray(d) ? d : []); setLoading(false); });
   };
 
   const handleDelete = async (id) => {
     if (!confirm('Delete this deck?')) return;
-    const res = await fetch(`${API}/api/decks/${id}`, {
+    const res = await fetch(`${API}/decks/${id}`, {
       method: 'DELETE', headers: { Authorization: `Bearer ${token}` }
     });
     if (res.ok) { toast.success('Deck deleted'); fetchDecks(); }

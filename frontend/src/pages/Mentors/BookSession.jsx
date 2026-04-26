@@ -31,14 +31,14 @@ export default function BookSession() {
   const allSlots = generateSlots();
 
   useEffect(() => {
-    fetch(`${API}/api/mentors/${mentorId}`)
+    fetch(`${API}/mentors/${mentorId}`)
       .then(r => r.json())
       .then(setMentor);
   }, [mentorId]);
 
   useEffect(() => {
     if (!selectedDate) return;
-    fetch(`${API}/api/bookings/availability/${mentorId}?date=${selectedDate}`)
+    fetch(`${API}/bookings/availability/${mentorId}?date=${selectedDate}`)
       .then(r => r.json())
       .then(data => setBookedSlots((data.bookedSlots || []).map(s => s.startTime)));
   }, [selectedDate, mentorId]);
@@ -50,7 +50,7 @@ export default function BookSession() {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${API}/api/bookings`, {
+      const res = await fetch(`${API}/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ mentorId, sessionDate: selectedDate, startTime: selectedSlot, durationMinutes: duration, agenda })

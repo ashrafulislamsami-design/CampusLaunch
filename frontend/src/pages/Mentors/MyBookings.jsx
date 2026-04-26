@@ -22,7 +22,7 @@ export default function MyBookings() {
   const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
-    fetch(`${API}/api/bookings/my`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${API}/bookings/my`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(data => { setBookings(Array.isArray(data) ? data : []); setLoading(false); })
       .catch(() => setLoading(false));
@@ -30,7 +30,7 @@ export default function MyBookings() {
 
   const handleCancel = async (bookingId) => {
     if (!confirm('Cancel this booking?')) return;
-    const res = await fetch(`${API}/api/bookings/${bookingId}/cancel`, {
+    const res = await fetch(`${API}/bookings/${bookingId}/cancel`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -41,7 +41,7 @@ export default function MyBookings() {
   };
 
   const handleRate = async () => {
-    const res = await fetch(`${API}/api/bookings/${ratingModal}/rate`, {
+    const res = await fetch(`${API}/bookings/${ratingModal}/rate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ rating, feedback })

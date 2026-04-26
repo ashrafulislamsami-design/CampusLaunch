@@ -38,7 +38,7 @@ export default function DeckReport() {
   const [activeVer, setActiveVer] = useState(null);
 
   useEffect(() => {
-    fetch(`${API}/api/decks/${id}/report`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${API}/decks/${id}/report`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => {
         setReport(d);

@@ -28,7 +28,7 @@ const PrivateChat = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await axios.get(`${API}/api/private-messages/${connectionId}`, {
+      const res = await axios.get(`${API}/private-messages/${connectionId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data || []);
@@ -42,7 +42,7 @@ const PrivateChat = () => {
     const init = async () => {
       try {
         setLoading(true);
-        const activeRes = await axios.get(`${API}/api/connections/active`, {
+        const activeRes = await axios.get(`${API}/connections/active`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const match = activeRes.data.find(c => c.connectionId === connectionId);
@@ -78,7 +78,7 @@ const PrivateChat = () => {
     try {
       setSending(true);
       const res = await axios.post(
-        `${API}/api/private-messages/${connectionId}`,
+        `${API}/private-messages/${connectionId}`,
         { text },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -97,7 +97,7 @@ const PrivateChat = () => {
     if (!text) return;
     try {
       const res = await axios.patch(
-        `${API}/api/private-messages/message/${messageId}`,
+        `${API}/private-messages/message/${messageId}`,
         { text },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -112,7 +112,7 @@ const PrivateChat = () => {
   const handleDelete = async (messageId) => {
     try {
       await axios.delete(
-        `${API}/api/private-messages/message/${messageId}`,
+        `${API}/private-messages/message/${messageId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessages(prev => prev.filter(m => m._id !== messageId));
@@ -124,7 +124,7 @@ const PrivateChat = () => {
   const handleSaveToggle = async (messageId) => {
     try {
       const res = await axios.patch(
-        `${API}/api/private-messages/message/${messageId}/save`,
+        `${API}/private-messages/message/${messageId}/save`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

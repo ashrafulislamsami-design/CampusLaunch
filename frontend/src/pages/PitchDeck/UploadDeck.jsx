@@ -25,7 +25,7 @@ export default function UploadDeck() {
       fd.append('pdf', file);
       if (!isNewVersion) { fd.append('title', title); fd.append('description', description); }
 
-      const url    = isNewVersion ? `${API}/api/decks/${id}/version` : `${API}/api/decks`;
+      const url    = isNewVersion ? `${API}/decks/${id}/version` : `${API}/decks`;
       const res    = await fetch(url, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },

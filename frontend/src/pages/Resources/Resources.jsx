@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config';
 import toast from 'react-hot-toast';
 import { Download, ThumbsUp, ThumbsDown, Eye, Plus, Filter } from 'lucide-react';
 
@@ -29,8 +30,13 @@ const Resources = () => {
       params.append('sortBy', filters.sortBy);
       params.append('order', filters.order);
 
-      const response = await axios.get(`/api/resources?${params}`);
-      setResources(response.data);
+      const response = await axios.get(`${API_BASE_URL}/resources?${params}`);
+      if (Array.isArray(response.data)) {
+        setResources(response.data);
+      } else {
+        setResources([]);
+        console.error('Expected array from /api/resources, got:', response.data);
+      }
     } catch (error) {
       toast.error('Failed to fetch resources');
     } finally {
@@ -40,7 +46,7 @@ const Resources = () => {
 
   const handleVote = async (resourceId, vote) => {
     try {
-      await axios.post(`/api/resources/${resourceId}/vote`, { vote }, {
+      await axios.post(`${API_BASE_URL}/resources/${resourceId}/vote`, { vote }, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       fetchResources(); // Refresh to get updated votes
@@ -66,7 +72,7 @@ const Resources = () => {
       } else {
         // For doc/pdf files, download from backend endpoint
         const response = await axios.get(
-          `/api/resources/${resource._id}/download`,
+          `${API_BASE_URL}/resources/${resource._id}/download`,
           {
             headers: { 'Authorization': `Bearer ${token}` },
             responseType: 'blob'
@@ -158,7 +164,7 @@ const Resources = () => {
 
       {/* Resources Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {resources.map(resource => (
+        {Array.isArray(resources) && resources.map(resource => (
           <div key={resource._id} className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
             <p className="text-gray-600 mb-3">{resource.description}</p>
@@ -171,7 +177,7 @@ const Resources = () => {
               </span>
             </div>
             <p className="text-sm text-gray-500 mb-4">
-              By {resource.author.name} • {resource.downloads} downloads
+              By {resource.author?.name || 'Unknown'} • {resource.downloads} downloads
             </p>
 
             {/* Votes */}

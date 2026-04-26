@@ -37,7 +37,7 @@ export default function PortfolioEditor() {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const res = await fetch(`${API}/api/teams/${teamId}`, {
+        const res = await fetch(`${API}/teams/${teamId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -74,7 +74,7 @@ export default function PortfolioEditor() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const res = await fetch(`${API}/api/teams/${teamId}/portfolio`, {
+      const res = await fetch(`${API}/teams/${teamId}/portfolio`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

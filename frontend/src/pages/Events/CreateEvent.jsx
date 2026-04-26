@@ -44,7 +44,7 @@ export default function CreateEvent() {
       Object.entries(form).forEach(([k, v]) => fd.append(k, v));
       if (banner) fd.append('banner', banner);
 
-      const res  = await fetch(`${API}/api/hub`, {
+      const res  = await fetch(`${API}/hub`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd
