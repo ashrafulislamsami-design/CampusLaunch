@@ -1,6 +1,8 @@
 const Groq = require('groq-sdk');
 const Report = require('../models/Report');
 const Team = require('../models/Team');
+const emailService = require('../services/emailService');
+
 
 // Helper function to calculate similarity between suggestion objects
 function calculateSimilarity(suggestions1, suggestions2) {
@@ -204,6 +206,10 @@ ${isAllEmpty ?
       console.log('Groq API call completed successfully');
     } catch (apiError) {
       console.error('Groq API call failed:', apiError.message);
+      
+      // Trigger admin alert email
+      emailService.sendGroqAlert(apiError.message, 'llama-3.3-70b-versatile');
+
       return res.status(500).json({
         message: 'AI service temporarily unavailable',
         error: apiError.message

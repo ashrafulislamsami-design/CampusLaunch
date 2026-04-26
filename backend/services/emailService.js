@@ -49,6 +49,8 @@ const WeekUnlockedEmail = require('../emails/WeekUnlockedEmail');
 const ConnectionRequestEmail = require('../emails/ConnectionRequestEmail');
 const ConnectionAcceptedEmail = require('../emails/ConnectionAcceptedEmail');
 const CanvasVersionSavedEmail = require('../emails/CanvasVersionSavedEmail');
+const GroqAlertEmail = require('../emails/GroqAlertEmail');
+
 
 // ────────────────────────────────────────────────────────────────────
 // Resend client — initialize lazily and gracefully.
@@ -90,7 +92,8 @@ const EMAIL_PREFERENCE_MAP = {
   week_unlocked: 'curriculumProgress',
   connection_request: 'coFounderMatches',
   connection_accepted: 'coFounderMatches',
-  canvas_version_saved: 'teamCanvasUpdates'
+  canvas_version_saved: 'teamCanvasUpdates',
+  groq_alert: null
 };
 
 const shouldSendEmail = async (userId, emailType) => {
@@ -539,6 +542,22 @@ const emailService = {
         teamId: team?._id ? String(team._id) : null,
         versionId: version?._id ? String(version._id) : null
       }
+    });
+  },
+
+  /** 17. Groq API Alert — sends to the admin */
+  sendGroqAlert: async (errorMsg, modelName) => {
+    const adminEmail = 'ashraful.islam.sami@g.bracu.ac.bd';
+    return _send({
+      to: adminEmail,
+      subject: `🚨 Groq API Failure: ${modelName || 'Unknown Model'}`,
+      emailType: 'groq_alert',
+      component: GroqAlertEmail,
+      props: {
+        error: errorMsg,
+        model: modelName
+      },
+      metadata: { error: errorMsg, model: modelName }
     });
   },
 

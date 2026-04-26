@@ -3,6 +3,8 @@ const User = require('../models/User');
 const Connection = require('../models/Connection');
 const Team = require('../models/Team');
 const { sendNotification } = require('../utils/notificationHelper');
+const emailService = require('../services/emailService');
+
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
@@ -234,6 +236,10 @@ Sort results from highest to lowest matchScore. Include all candidates.`;
       console.log('Groq API call completed successfully');
     } catch (apiError) {
       console.error('Groq API call failed:', apiError.message);
+      
+      // Trigger admin alert email
+      emailService.sendGroqAlert(apiError.message, 'llama-3.3-70b-versatile');
+
       console.log('Falling back to robust rule-based matching...');
       
       // Fallback: Robust rule-based matching
