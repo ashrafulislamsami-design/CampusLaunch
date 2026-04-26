@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 import toast from 'react-hot-toast';
 import { Download, ThumbsUp, ThumbsDown, Edit, Trash2, ArrowLeft } from 'lucide-react';
 

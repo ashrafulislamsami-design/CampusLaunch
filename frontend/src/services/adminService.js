@@ -4,7 +4,7 @@
  * Every call attaches the Bearer token from localStorage.
  */
 
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '@/config';
 
 const BASE = `${API_BASE_URL}/admin`;
 

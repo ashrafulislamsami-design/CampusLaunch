@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
-import { validateIdea } from '../../services/aiService';
-import { AuthContext } from '../../context/AuthContext';
+import { validateIdea } from '@/services/aiService';
+import { AuthContext } from '@/context/AuthContext';
+import { API_BASE_URL } from '@/config';
 import toast from 'react-hot-toast';
 import { Target, Users, AlertTriangle, ArrowRight, Save, Sparkles, TrendingUp, Info, Zap, Check } from 'lucide-react';
 
@@ -131,7 +132,7 @@ const AIValidator = () => {
     setSavingPitch(true);
     try {
       const title = `AI Pitch Summary – ${result.ideaData.problem ? result.ideaData.problem.substring(0, 48) : 'Startup Insight'}`;
-      const response = await fetch(`/api/teams/${userTeamId}/documents`, {
+      const response = await fetch(`${API_BASE_URL}/teams/${userTeamId}/documents`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

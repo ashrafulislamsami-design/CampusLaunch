@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 import {
   Send, ArrowLeft, MessageSquare, Loader,
   Pencil, Trash2, Bookmark, BookmarkCheck, Check, X

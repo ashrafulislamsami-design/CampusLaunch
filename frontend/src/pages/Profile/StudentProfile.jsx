@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 import ProfileForm from '../../components/profile/ProfileForm';
 import toast from 'react-hot-toast';
 import {

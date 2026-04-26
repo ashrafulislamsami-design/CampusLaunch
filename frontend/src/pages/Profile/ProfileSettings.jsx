@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { User as UserIcon, Bookmark, BookOpen, Building, Sparkles, TrendingUp } from 'lucide-react';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const ProfileSettings = () => {
   const { token, user, setUser } = useContext(AuthContext);

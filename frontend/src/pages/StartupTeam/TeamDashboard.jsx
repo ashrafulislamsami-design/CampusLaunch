@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
 import { Plus, Users, LayoutTemplate, KanbanSquare, Pencil, X, ExternalLink, Activity, MessageSquare, Trash2, FileText, Link as LinkIcon } from 'lucide-react';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 import BusinessCanvas from '../../components/StartupTeam/BusinessCanvas';
 import CollaborationHub from '../../components/StartupTeam/CollaborationHub';
 import ProgressTimeline from '../../components/StartupTeam/ProgressTimeline';

@@ -5,7 +5,7 @@ import {
   CheckCircle2, ExternalLink, UserCheck, Award
 } from 'lucide-react';
 
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 
 const SKILL_OPTIONS = [
   'coding', 'design', 'marketing', 'writing', 'finance',

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { API_BASE } from '../components/canvas/canvasConstants';
+import { API_BASE_URL } from '@/config';
 
 const authHeaders = (token) => ({ headers: { Authorization: `Bearer ${token}` } });
-const url = (path) => `${API_BASE}/api/canvas${path}`;
+const url = (path) => `${API_BASE_URL}/canvas${path}`;
 
 export const canvasService = {
   getCanvas: (token, teamId) =>

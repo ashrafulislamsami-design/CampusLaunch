@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Send, Link as LinkIcon, FilePlus, ExternalLink, Pin, Trash2 } from 'lucide-react';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const CollaborationHub = ({ teamId, messages: initialMessages = [], documents = [], onRefresh, isCEO = false, onDeleteDocument }) => {
   const { token, user } = useContext(AuthContext);

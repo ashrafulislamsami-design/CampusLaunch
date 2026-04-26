@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '@/context/AuthContext';
+import { API_BASE_URL } from '@/config';
 import { ArrowLeft, FileText, Sparkles, PieChart, Users, Target, Activity, AlertTriangle, CheckCircle, TrendingUp, Search } from 'lucide-react';
 
 const AIReportPage = () => {
@@ -24,7 +25,7 @@ const AIReportPage = () => {
       setError(null);
 
       try {
-        const res = await fetch(`/api/ai/reports/${normalizedReportId}`, {
+        const res = await fetch(`${API_BASE_URL}/ai/reports/${normalizedReportId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

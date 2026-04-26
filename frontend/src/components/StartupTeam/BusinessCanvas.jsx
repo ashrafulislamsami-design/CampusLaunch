@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Save } from 'lucide-react';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const Block = ({ title, name, rowSpan, colSpan, extraClasses = '', value, onChange, onBlur }) => (
   <div className={`flex flex-col bg-[#ebe9e4] border-2 border-stone-200 p-5 ${rowSpan} ${colSpan} ${extraClasses}`}>

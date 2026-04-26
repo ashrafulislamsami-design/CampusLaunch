@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '@/context/AuthContext';
+import { API_BASE_URL } from '@/config';
 
 const EditResource = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const EditResource = () => {
 
   const fetchResource = async () => {
     try {
-      const response = await axios.get(`/api/resources/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/resources/${id}`);
       const resource = response.data;
       setFormData({
         title: resource.title,
@@ -59,7 +60,7 @@ const EditResource = () => {
         data.append('file', file);
       }
 
-      await axios.put(`/api/resources/${id}`, data, {
+      await axios.put(`${API_BASE_URL}/resources/${id}`, data, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

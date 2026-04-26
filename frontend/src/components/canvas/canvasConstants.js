@@ -1,6 +1,6 @@
 // Shared constants for the Business Model Canvas Builder feature.
 
-import { SOCKET_URL as BASE_ORIGIN } from '../../config';
+import { SOCKET_URL as BASE_ORIGIN } from '@/config';
 
 export const API_BASE = BASE_ORIGIN;
 export const SOCKET_URL = BASE_ORIGIN;

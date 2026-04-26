@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Rocket, Target, Lightbulb, Users, ArrowRight, Filter, Globe } from 'lucide-react';
 
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 
 const TeamCard = ({ team }) => {
   return (

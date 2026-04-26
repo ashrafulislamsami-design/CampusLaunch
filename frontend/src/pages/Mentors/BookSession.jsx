@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import { Users, CalendarDays, Clock, FileText, ArrowLeft, Briefcase, Zap } from 'lucide-react';
 
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 
 function generateSlots() {
   const slots = [];

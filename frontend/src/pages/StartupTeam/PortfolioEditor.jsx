@@ -8,7 +8,7 @@ import {
   Target, Lightbulb, TrendingUp
 } from 'lucide-react';
 
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 
 export default function PortfolioEditor() {
   const { teamId } = useParams();

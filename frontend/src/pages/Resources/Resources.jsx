@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 import toast from 'react-hot-toast';
 import { Download, ThumbsUp, ThumbsDown, Eye, Plus, Filter } from 'lucide-react';
 

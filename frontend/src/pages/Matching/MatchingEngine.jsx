@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Zap, Plus, CheckCircle, Clock, Code2, BookOpen, Sparkles } from 'lucide-react';
 import axios from 'axios';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const MatchingEngine = () => {
   const { token, user } = useContext(AuthContext);

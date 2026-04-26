@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 import { Upload, FileText, Rocket } from 'lucide-react';
 import toast from 'react-hot-toast';
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 import { FileText, Upload, Trash2, BarChart2, Plus } from 'lucide-react';
 import toast from 'react-hot-toast';
 

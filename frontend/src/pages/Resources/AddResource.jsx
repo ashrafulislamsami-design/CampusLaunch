@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '@/context/AuthContext';
+import { API_BASE_URL } from '@/config';
 import toast from 'react-hot-toast';
 import { Upload, Link as LinkIcon } from 'lucide-react';
-import { AuthContext } from '../../context/AuthContext';
 
 const AddResource = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const AddResource = () => {
       console.log('Submitting resource with data:', formData);
       console.log('Token:', token);
 
-      await axios.post('/api/resources', data, {
+      await axios.post(`${API_BASE_URL}/resources`, data, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

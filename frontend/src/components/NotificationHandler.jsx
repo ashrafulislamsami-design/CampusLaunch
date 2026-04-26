@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { setupMessaging, getToken, onMessage } from '../firebaseConfig';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '@/config';
 
 const VAPID_KEY = 'BBbWTBsBpH3KmooqTG1sgFMLmHDchn9nSLvA46L4X2o88sYdVA5YZIoyz8Jtj9igo-ICjZkC2JIDKFTUS3BvnvE';
 

@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Trophy, Users, Award, Star, TrendingUp, DollarSign, BookOpen, UserCheck } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const Leaderboard = () => {
   const { token, user } = useContext(AuthContext);

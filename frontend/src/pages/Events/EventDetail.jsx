@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Calendar, MapPin, Video, Users, Tag, Edit3, Trash2, CheckCircle2, Star } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 
 export default function EventDetail() {
   const { id } = useParams();

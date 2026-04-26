@@ -134,7 +134,7 @@ mongoose.connect(process.env.MONGO_URI, {
   console.error('MongoDB connection error. Starting server anyway...', err);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 // =========================================================================
 // Canvas Builder: HTTP server + Socket.io initialization (additive).
@@ -178,7 +178,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Server Error' });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { X, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '@/context/AuthContext';
+import { API_BASE_URL } from '@/config';
 import { registerTeam, uploadPitchDeck } from '../../services/pitchService';
 
 const TeamRegistrationModal = ({ eventId, onClose, onRegistered }) => {
@@ -15,7 +16,7 @@ const TeamRegistrationModal = ({ eventId, onClose, onRegistered }) => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const res = await fetch('/api/teams/user/me', {
+        const res = await fetch(`${API_BASE_URL}/teams/user/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();

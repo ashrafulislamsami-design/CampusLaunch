@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 import { Rocket, Target, CalendarDays, Coins, Users, Gem, BookOpen, Mic2, LayoutGrid, FileText} from 'lucide-react';
 import FundingCard from '../Funding/FundingCard';
 

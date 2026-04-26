@@ -7,7 +7,7 @@ import {
   Download
 } from 'lucide-react';
 import ProgressTimeline from '../../components/StartupTeam/ProgressTimeline';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const PublicProfile = () => {
   const { id } = useParams();

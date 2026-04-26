@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import FundingCard from './FundingCard';
 import { Search, Filter, Rocket } from 'lucide-react';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '@/config';
 
 const FundingDirectory = () => {
   const { token, user, setUser } = useContext(AuthContext);

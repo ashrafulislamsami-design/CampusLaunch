@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { API_BASE_URL as API } from '../../config';
+import { API_BASE_URL as API } from '@/config';
 import {
   Search, Filter, MapPin, Video, Calendar, Users,
   Clock, Tag, Rocket, Plus, ExternalLink
