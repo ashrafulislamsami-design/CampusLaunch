@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config';
 import toast from 'react-hot-toast';
 import { Download, ThumbsUp, ThumbsDown, Edit, Trash2, ArrowLeft } from 'lucide-react';
 
@@ -19,7 +20,7 @@ const ResourceDetail = () => {
 
   const fetchResource = async () => {
     try {
-      const response = await axios.get(`/api/resources/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/resources/${id}`);
       setResource(response.data);
     } catch (error) {
       toast.error('Failed to fetch resource');
@@ -31,7 +32,7 @@ const ResourceDetail = () => {
 
   const handleVote = async (vote) => {
     try {
-      await axios.post(`/api/resources/${id}/vote`, { vote }, {
+      await axios.post(`${API_BASE_URL}/resources/${id}/vote`, { vote }, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       fetchResource(); // Refresh to get updated votes
@@ -56,7 +57,7 @@ const ResourceDetail = () => {
       } else {
         // For doc/pdf files, download from backend endpoint
         const response = await axios.get(
-          `/api/resources/${id}/download`,
+          `${API_BASE_URL}/resources/${id}/download`,
           {
             headers: { 'Authorization': `Bearer ${token}` },
             responseType: 'blob'
@@ -82,7 +83,7 @@ const ResourceDetail = () => {
     if (!confirm('Are you sure you want to delete this resource?')) return;
 
     try {
-      await axios.delete(`/api/resources/${id}`, {
+      await axios.delete(`${API_BASE_URL}/resources/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       toast.success('Resource deleted');
@@ -102,7 +103,7 @@ const ResourceDetail = () => {
 
   if (!resource) return null;
 
-  const canEdit = user && (user._id === resource.author._id || user.role === 'Organizer');
+  const canEdit = user && (user._id === resource.author?._id || user.role === 'Organizer');
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -152,7 +153,7 @@ const ResourceDetail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
             <h3 className="font-semibold mb-2">Author</h3>
-            <p>{resource.author.name}</p>
+            <p>{resource.author?.name || 'Unknown'}</p>
           </div>
           <div>
             <h3 className="font-semibold mb-2">Downloads</h3>
